@@ -27,15 +27,16 @@ WalkontableViewport.prototype.getWorkspaceHeight = function () {
 
 WalkontableViewport.prototype.getWorkspaceWidth = function () {
   var width,
+    documentOffsetWidth = document.documentElement.offsetWidth,
     totalColumns = this.instance.getSetting("totalColumns"),
     scrollHandler = this.instance.wtScrollbars.horizontal.scrollHandler,
     overflow,
     stretchSetting = this.instance.getSetting('stretchH');
 
   if(Handsontable.freezeOverlays) {
-    width = Math.min(document.documentElement.offsetWidth - this.getWorkspaceOffset().left, document.documentElement.offsetWidth);
+    width = Math.min(documentOffsetWidth - this.getWorkspaceOffset().left, documentOffsetWidth);
   } else {
-    width = Math.min(this.getContainerFillWidth(), document.documentElement.offsetWidth - this.getWorkspaceOffset().left, document.documentElement.offsetWidth);
+    width = Math.min(this.getContainerFillWidth(), documentOffsetWidth - this.getWorkspaceOffset().left, documentOffsetWidth);
   }
 
   if (scrollHandler === window && totalColumns > 0 && this.sumColumnWidths(0, totalColumns - 1) > width) {
